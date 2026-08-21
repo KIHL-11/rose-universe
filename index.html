@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#05050a">
+  <title>Rose Universe — Particle Bouquet</title>
+  <link rel="stylesheet" href="./style.css?v=release-1">
+</head>
+<body>
+  <main id="experience" aria-label="代码生成的浪漫粒子花束">
+    <div id="loading" role="status">assembling particles…</div>
+
+    <header id="title">
+      <span>ROSE UNIVERSE</span>
+      <small>PARTICLE BOUQUET / 01</small>
+    </header>
+    <div id="collection-status">
+      <span id="flower-progress" role="status" aria-live="polite">♡ 0 / 36</span>
+      <button id="reset-collection" type="button" aria-label="重新收集全部花朵">重新收集</button>
+    </div>
+
+    <nav id="share-actions" aria-label="分享花束">
+      <button id="custom-share-button" type="button" aria-label="创建专属花束">
+        <span aria-hidden="true">✦</span><em>专属</em>
+      </button>
+      <button id="share-button" type="button" aria-label="分享 Rose Universe">
+        <span aria-hidden="true">↗</span><em>分享</em>
+      </button>
+    </nav>
+
+    <div id="hint">移动指针触碰粒子 · 轻点花束听一句心里话</div>
+
+    <div id="message" role="status" aria-live="polite">
+      <span aria-hidden="true">♡</span>
+      <p id="message-text"></p>
+    </div>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <dialog id="share-dialog" aria-labelledby="share-dialog-title">
+      <form id="share-form">
+        <div class="dialog-heading">
+          <span>PERSONAL LINK</span>
+          <h2 id="share-dialog-title">创建专属花束</h2>
+        </div>
+        <label>
+          <span>送给谁</span>
+          <input id="share-to" name="to" maxlength="24" autocomplete="off" placeholder="小雨" required>
+        </label>
+        <label>
+          <span>来自谁 <small>选填</small></span>
+          <input id="share-from" name="from" maxlength="24" autocomplete="off" placeholder="一个想念你的人">
+        </label>
+        <label>
+          <span>一句祝福 <small>最多 80 字</small></span>
+          <textarea id="share-message" name="message" maxlength="80" rows="3" placeholder="希望你今天也有被世界温柔对待。" required></textarea>
+        </label>
+        <div class="dialog-actions">
+          <button id="share-cancel" type="button">取消</button>
+          <button type="submit">生成并分享 ↗</button>
+        </div>
+      </form>
+    </dialog>
+  </main>
+  <noscript>请启用 JavaScript 查看粒子花束。</noscript>
+  <script type="module" src="./src/main.js?v=release-1"></script>
+</body>
+</html>
