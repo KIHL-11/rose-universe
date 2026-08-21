@@ -118,10 +118,11 @@ const shareToInput = document.querySelector("#share-to");
 const shareFromInput = document.querySelector("#share-from");
 const shareMessageInput = document.querySelector("#share-message");
 const toastElement = document.querySelector("#toast");
-const musicToggleButton = document.querySelector("#musicToggle");
+const musicToggle = document.querySelector("#music-toggle");
 const bgMusic = new Audio("./assets/music.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.22;
+bgMusic.preload = "auto";
 let messageTimer = 0;
 let toastTimer = 0;
 let dedicationShown = false;
@@ -196,39 +197,32 @@ function showToast(text, duration = 2000) {
   toastTimer = window.setTimeout(() => toastElement.classList.remove("visible"), duration);
 }
 
-function updateMusicButton() {
-  const isPlaying = !bgMusic.paused;
-  musicToggleButton.classList.toggle("is-playing", isPlaying);
-  musicToggleButton.setAttribute("aria-pressed", String(isPlaying));
-  musicToggleButton.setAttribute("aria-label", isPlaying ? "暂停背景音乐" : "播放背景音乐");
+async function toggleMusic() {
+  if (bgMusic.paused) {
+    try {
+      await bgMusic.play();
+      musicToggle.classList.add("playing");
+      musicToggle.setAttribute("aria-label", "暂停背景音乐");
+    } catch (error) {
+      console.error("Music playback failed:", error);
+      showToast("音乐暂时无法播放");
+    }
+  } else {
+    bgMusic.pause();
+    musicToggle.classList.remove("playing");
+    musicToggle.setAttribute("aria-label", "播放背景音乐");
+  }
 }
 
-musicToggleButton.addEventListener("click", async () => {
-  if (!bgMusic.paused) {
-    bgMusic.pause();
-    return;
-  }
-
-  try {
-    await bgMusic.play();
-  } catch (error) {
-    console.warn("Background music playback failed:", error);
-    showToast("音乐暂时无法播放");
-  }
-});
-
-bgMusic.addEventListener("play", updateMusicButton);
-bgMusic.addEventListener("pause", updateMusicButton);
-bgMusic.addEventListener("error", () => {
-  console.error("music.mp3 failed to load");
-  updateMusicButton();
-});
+musicToggle.addEventListener("click", toggleMusic);
 
 document.addEventListener("visibilitychange", () => {
-  if (document.hidden && !bgMusic.paused) bgMusic.pause();
+  if (document.hidden && !bgMusic.paused) {
+    bgMusic.pause();
+    musicToggle.classList.remove("playing");
+    musicToggle.setAttribute("aria-label", "播放背景音乐");
+  }
 });
-
-updateMusicButton();
 
 function isLocalAddress() {
   const hostname = window.location.hostname;

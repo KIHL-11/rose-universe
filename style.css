@@ -220,16 +220,17 @@ canvas {
   letter-spacing: 0.12em;
 }
 
-#musicToggle {
+#music-toggle {
   position: fixed;
-  z-index: 9999;
-  bottom: max(16px, env(safe-area-inset-bottom));
-  left: max(16px, env(safe-area-inset-left));
-  display: grid;
+  z-index: 10000;
+  bottom: 18px;
+  left: 18px;
+  display: flex;
   width: 44px;
   height: 44px;
   padding: 0;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   border: 1px solid rgba(235, 217, 231, 0.12);
   border-radius: 50%;
   background: rgba(10, 9, 15, 0.44);
@@ -240,21 +241,15 @@ canvas {
   transition: border-color 0.22s ease, background 0.22s ease, color 0.22s ease;
 }
 
-#musicToggle span {
-  font-size: 15px;
-  line-height: 1;
-  transform: translateY(-1px);
-}
-
-#musicToggle:hover,
-#musicToggle:focus-visible {
+#music-toggle:hover,
+#music-toggle:focus-visible {
   border-color: rgba(236, 182, 213, 0.3);
   background: rgba(25, 17, 27, 0.66);
   color: rgba(255, 236, 247, 0.9);
   outline: none;
 }
 
-#musicToggle.is-playing {
+#music-toggle.playing {
   border-color: rgba(232, 159, 201, 0.24);
   color: rgba(248, 210, 232, 0.8);
   animation: music-breathe 3.2s ease-in-out infinite;
@@ -520,7 +515,7 @@ canvas {
     animation-duration: 0.01ms;
   }
 
-  #musicToggle.is-playing {
+  #music-toggle.playing {
     animation: none;
   }
 }
