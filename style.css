@@ -220,6 +220,57 @@ canvas {
   letter-spacing: 0.12em;
 }
 
+#music-toggle {
+  position: fixed;
+  z-index: 3;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  left: max(8px, env(safe-area-inset-left));
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(235, 217, 231, 0.12);
+  border-radius: 50%;
+  background: rgba(10, 9, 15, 0.44);
+  color: rgba(234, 211, 227, 0.55);
+  font: inherit;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.22s ease, background 0.22s ease, color 0.22s ease;
+}
+
+#music-toggle span {
+  font-size: 15px;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+#music-toggle:hover,
+#music-toggle:focus-visible {
+  border-color: rgba(236, 182, 213, 0.3);
+  background: rgba(25, 17, 27, 0.66);
+  color: rgba(255, 236, 247, 0.9);
+  outline: none;
+}
+
+#music-toggle.is-playing {
+  border-color: rgba(232, 159, 201, 0.24);
+  color: rgba(248, 210, 232, 0.8);
+  animation: music-breathe 3.2s ease-in-out infinite;
+}
+
+@keyframes music-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(216, 104, 170, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 13px rgba(216, 104, 170, 0.1);
+  }
+}
+
 #hint {
   bottom: max(18px, env(safe-area-inset-bottom));
   left: 50%;
@@ -421,6 +472,7 @@ canvas {
 
   #hint {
     bottom: max(13px, env(safe-area-inset-bottom));
+    width: calc(100vw - 128px);
     font-size: 9px;
   }
 
@@ -466,5 +518,9 @@ canvas {
 
   .completion-petal {
     animation-duration: 0.01ms;
+  }
+
+  #music-toggle.is-playing {
+    animation: none;
   }
 }
